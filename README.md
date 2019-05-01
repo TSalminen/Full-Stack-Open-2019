@@ -1,2 +1,2 @@
 # Full-Stack-Open-2019
-asdf asdf
+Full Stack Open 2019 -kurssin harjoitustehtävät
