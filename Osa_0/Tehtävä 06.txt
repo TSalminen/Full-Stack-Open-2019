@@ -1,0 +1,40 @@
+title Muistiinpanon luominen (spa)
+
+
+
+note over selain:
+
+SPA-versiossa muistiinpano-lomakkeen submittaaminen
+saa selaimen ajamaan js-koodia, joka
+
+1. est‰‰ lomakkeen l‰hetyksen oletusarvoisen toiminnan
+
+2. luo muistiinpano-olion
+
+3. lis‰‰ sen muistiinpanojen listalle
+
+4. piirt‰‰ n‰ytett‰v‰n sis‰llˆn uudestaan
+
+5. ja l‰hett‰‰ palvelimelle HTTP POST -pyynnˆn 
+osoitteeseen /new_note_spa ja vie mukanaan 
+json-muodossa olevat tiedot muistiinpanosta
+
+end note
+
+
+
+selain->palvelin: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+
+
+
+note over palvelin
+
+Palvelin saa muistiinpanon tiedot,
+lis‰‰ sen samaan listaan muiden 
+
+muistiinpanojen kanssa ja 
+vastaa koodilla 201 Created
+
+end note
+
+
