@@ -2,6 +2,9 @@ title https://fullstack-exampleapp.herokuapp.com/spa
 
 selain->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/spa
 palvelin-->selain: HTML-koodi
+note over selain:
+HTML-koodissa pyynnöt .css ja .js-tiedostoihin
+end note
 selain->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
 palvelin-->selain: main.css
 selain->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/spa.js
