@@ -42,6 +42,14 @@ const App = () => {
   )
 
   const Statistics = (props) => {
+      if (all === 0) {
+          return (
+              <>
+              <h1>statistics</h1>
+              <h3>No feedback given</h3>
+              </>
+          )
+      }
       return (
         <>
         <h1>statistics</h1>
