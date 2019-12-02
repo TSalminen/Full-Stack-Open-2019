@@ -41,6 +41,19 @@ const App = () => {
       </button>
   )
 
+  const Statistics = (props) => {
+      return (
+        <>
+        <h1>statistics</h1>
+        <Display category='good' value={good} />
+        <Display category='neutral' value={neutral} />
+        <Display category='bad' value={bad} />
+        <Display category='all' value={all} />
+        <Display category='average' value={calculateAverage()} />
+        <Display category='positive' value={calculatePositive() + ' %'} />
+        </>
+      )
+  }
 
   const Display = ({ category, value }) => <div>{category} {value}</div>
 
@@ -64,13 +77,7 @@ const App = () => {
                 text='bad'
             />
         </div>
-        <h1>statistics</h1>
-        <Display category='good' value={good} />
-        <Display category='neutral' value={neutral} />
-        <Display category='bad' value={bad} />
-        <Display category='all' value={all} />
-        <Display category='average' value={calculateAverage()} />
-        <Display category='positive' value={calculatePositive() + ' %'} />
+        <Statistics />
 
     </>
   )
