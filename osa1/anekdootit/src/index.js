@@ -21,6 +21,8 @@ const Button = ({ onClick, text}) => (
 const App = ({anecdotes}) => {
   const [selected, setSelected] = useState(0)
   const [voted, setVoted] = useState(false)
+  const [mostVotes, setMostVotes] = useState(0)
+  const [mostVoted, setMostVoted] = useState(anecdotes[0])
 
   const handleClicksNextAnecdote = () => {
     setSelected(getRndIndex(anecdotes))
@@ -37,20 +39,34 @@ const App = ({anecdotes}) => {
     const votesCopy = { ...votes }
     votesCopy[selected] += 1
     votes = { ...votesCopy }
+    if (votes[selected] > mostVotes) {
+      setMostVotes(votes[selected])
+      setMostVoted(anecdotes[selected])
+    }
     setVoted(!voted)
   }
 
   
-  const ShowVotes = ({votes}) => {
+  const ShowVotes = ({votes}) => <h3>has {votes[selected]} votes</h3>
+
+  const ShowMostVoted = ({mostVoted}) => {
     return (
+      <>
+      <h1>
+        Anecdote with most votes
+      </h1>
       <h3>
-        has {votes[selected]} votes
+        {mostVoted}
       </h3>
+      </>
     )
   }
 
   return (
     <>
+    <h1>
+      Anecdote of the day
+    </h1>
     <h3>
       {anecdotes[selected]}
     </h3>
@@ -63,6 +79,7 @@ const App = ({anecdotes}) => {
             onClick={() => handleClicksNextAnecdote()}
             text='next anecdote'
         />
+      <ShowMostVoted mostVoted={mostVoted}/>
     
     </>
   )
