@@ -10,6 +10,8 @@ const anecdotes = [
   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
 ]
 
+let votes = new Array(anecdotes.length).fill(0)
+
 const Button = ({ onClick, text}) => (
   <button onClick={onClick}>
       {text}
@@ -18,8 +20,9 @@ const Button = ({ onClick, text}) => (
 
 const App = ({anecdotes}) => {
   const [selected, setSelected] = useState(0)
+  const [voted, setVoted] = useState(false)
 
-  const handleClicks = () => {
+  const handleClicksNextAnecdote = () => {
     setSelected(getRndIndex(anecdotes))
   }
 
@@ -30,13 +33,34 @@ const App = ({anecdotes}) => {
       )
   }
 
+  const handleClicksVotes = () => {
+    const votesCopy = { ...votes }
+    votesCopy[selected] += 1
+    votes = { ...votesCopy }
+    setVoted(!voted)
+  }
+
+  
+  const ShowVotes = ({votes}) => {
+    return (
+      <h3>
+        has {votes[selected]} votes
+      </h3>
+    )
+  }
+
   return (
     <>
-    <h2>
+    <h3>
       {anecdotes[selected]}
-    </h2>
+    </h3>
+    <ShowVotes votes={votes} />
     <Button 
-            onClick={() => handleClicks()}
+            onClick={() => handleClicksVotes()}
+            text='vote'
+        />
+    <Button 
+            onClick={() => handleClicksNextAnecdote()}
             text='next anecdote'
         />
     
