@@ -13,43 +13,33 @@ const Content = ({parts}) => {
     )
     return (
         <div>
-            <ul>
+            <div>
                 {rows()}
-            </ul>
+            </div>
         </div>
     )
 }
 
-const Part = ({part}) => {
-    // console.log(props)
+const Part = ({part}) => <p>{part['name']} {part['exercises']}</p>
+
+const Total = ({parts}) => {
+    const reducer = (accumulator, currentValue) => accumulator + currentValue
+    const exerciseList = parts.map(part => part['exercises'])
+    // console.log(exerciseList)
+    const numberOfExercises = exerciseList.reduce(reducer)
+    // console.log(numberOfExercises)
+    
     return (
-        <>
-            <p>
-                {part['name']} {part['exercises']}
-            </p>
-        </>
+        <p><b>total of {numberOfExercises} exercises</b></p>
     )
 }
-
-// const Total = (props) => {
-//     // console.log(props)
-//     let exercises = 0
-//     props.course['parts'].forEach(part => {
-//         exercises += part.exercises
-//     })
-//     return (
-//         <>
-//             <p>Number of excercises {exercises}</p>
-//         </>
-//     )
-// }
 
 const Course = ({course}) => {
     return (
         <>
         <Header course={course} />
         <Content parts={course['parts']} />
-        {/* <Total course={course} /> */}
+        <Total parts={course['parts']} />
         </>
     )
 }
@@ -72,7 +62,7 @@ const App = () => {
             name: 'State of a component',
             exercises: 14,
             id: 3
-        }   
+        }  
       ]
   }
    
