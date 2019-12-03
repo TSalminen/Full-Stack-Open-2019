@@ -45,25 +45,37 @@ const App = () => {
       if (all === 0) {
           return (
               <>
-              <h1>statistics</h1>
               <h3>No feedback given</h3>
               </>
           )
       }
       return (
         <>
-        <h1>statistics</h1>
-        <Statistic category='good' value={good} />
-        <Statistic category='neutral' value={neutral} />
-        <Statistic category='bad' value={bad} />
-        <Statistic category='all' value={all} />
-        <Statistic category='average' value={calculateAverage()} />
-        <Statistic category='positive' value={calculatePositive() + ' %'} />
+        <table>
+          <tbody>
+            <Statistic category='good' value={good} />
+            <Statistic category='neutral' value={neutral} />
+            <Statistic category='bad' value={bad} />
+            <Statistic category='all' value={all} />
+            <Statistic category='average' value={calculateAverage()} />
+            <Statistic category='positive' value={calculatePositive() + ' %'} />
+          </tbody>
+        </table>
+        
         </>
       )
   }
 
-  const Statistic = ({ category, value }) => <div>{category} {value}</div>
+  const Statistic = ({ category, value }) => {
+    return (
+      <>
+      <tr>
+        <td>{category}</td> 
+        <td>{value}</td>
+      </tr>
+      </>
+    )
+  }
 
     return (
         <>
@@ -85,6 +97,7 @@ const App = () => {
                 text='bad'
             />
         </div>
+        <h1>statistics</h1>
         <Statistics />
 
     </>
