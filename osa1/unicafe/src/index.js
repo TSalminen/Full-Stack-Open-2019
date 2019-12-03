@@ -53,17 +53,17 @@ const App = () => {
       return (
         <>
         <h1>statistics</h1>
-        <Display category='good' value={good} />
-        <Display category='neutral' value={neutral} />
-        <Display category='bad' value={bad} />
-        <Display category='all' value={all} />
-        <Display category='average' value={calculateAverage()} />
-        <Display category='positive' value={calculatePositive() + ' %'} />
+        <Statistic category='good' value={good} />
+        <Statistic category='neutral' value={neutral} />
+        <Statistic category='bad' value={bad} />
+        <Statistic category='all' value={all} />
+        <Statistic category='average' value={calculateAverage()} />
+        <Statistic category='positive' value={calculatePositive() + ' %'} />
         </>
       )
   }
 
-  const Display = ({ category, value }) => <div>{category} {value}</div>
+  const Statistic = ({ category, value }) => <div>{category} {value}</div>
 
     return (
         <>
