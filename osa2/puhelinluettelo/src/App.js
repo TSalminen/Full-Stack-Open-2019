@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 // import { notStrictEqual } from 'assert'
+import Persons from './components/Persons'
+import PersonForm from './components/PersonForm'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -11,58 +13,13 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ newFilter, setNewFilter ] = useState('')
-  const [ showAll, setShowAll ] = useState(true)
-
-  const addPerson = (event) => {
-      event.preventDefault()
-      const personObject = {
-          name: newName,
-          number: newNumber
-      }
-
-      const found = persons.find(element => element['name'] === newName)
-      if (found === undefined) {
-        setPersons(persons.concat(personObject))
-      } else {
-        window.alert(`${newName} is already added to phonebook`)
-      }
-      setNewName('')
-      setNewNumber('')
-  }
-
-  const handleNameChange = (event) => {
-      //console.log(event.target.value)
-      setNewName(event.target.value)
-  }
-
-  const handleNumberChange = (event) => {
-      //console.log(event.target.value)
-      setNewNumber(event.target.value)
-  }
 
   const handleFilterChange = (event) => {
-      //console.log(event.target.value)
       setNewFilter(event.target.value)
   }
 
   const personsToShow = persons.filter(person => person['name'].toLowerCase().includes(newFilter.toLowerCase()))
 
-  const rows = () => personsToShow.map(person =>
-    <Person 
-        key={person.name}
-        person={person}
-    />
-  )
-
-  const Person = ({person}) => {
-    return (
-      <>
-        <li>{person['name']} {person['number']}</li>
-      </>
-    )
-  }
-
-  
 
   return (
     <div>
@@ -74,26 +31,17 @@ const App = () => {
         />
       </div>
       <h2>add a new</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input 
-            value={newName} 
-            onChange={handleNameChange}
-          />
-        </div>
-        <div>
-          number: <input 
-            value={newNumber} 
-            onChange={handleNumberChange}
-          />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <PersonForm 
+        newName={newName}
+        setNewName={setNewName}
+        newNumber={newNumber}
+        setNewNumber={setNewNumber}
+        persons={persons}
+        setPersons={setPersons}
+      />
       <h2>Numbers</h2>
       <ul>
-          {rows()}
+          {<Persons personsToShow={personsToShow}/>}
       </ul>
     </div>
   )
