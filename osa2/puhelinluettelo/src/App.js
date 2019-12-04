@@ -16,12 +16,14 @@ const App = () => {
   const [ newNumber, setNewNumber ] = useState('')
   const [ newFilter, setNewFilter ] = useState('')
 
+  const baseUrl = 'http://localhost:3001/persons'
+
   useEffect(() => {
-    console.log('effect')
+    // console.log('effect')
     axios
-      .get('http://localhost:3001/persons')
+      .get(baseUrl)
       .then(response => {
-        console.log('promise fulfilled')
+        // console.log('promise fulfilled')
         setPersons(response.data)
       })
   }, [])
