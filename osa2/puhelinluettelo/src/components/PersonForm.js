@@ -1,5 +1,6 @@
 import React from 'react'
-import axios from 'axios'
+// import axios from 'axios'
+import personService from './../services/persons'
 
 const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setPersons}) => {
     const baseUrl = 'http://localhost:3001/persons'
@@ -13,12 +14,18 @@ const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setP
     
         const found = persons.find(element => element['name'] === newName)
         if (found === undefined) {
-          axios
-            .post(baseUrl, personObject)
-            .then(response => {
-                console.log(response)
-                setPersons(persons.concat(response.data))
+            personService
+            .create(personObject)
+            .then(returnedPerson => {
+                // console.log(response)
+                setPersons(persons.concat(returnedPerson))
             })
+        //   axios
+        //     .post(baseUrl, personObject)
+        //     .then(response => {
+        //         console.log(response)
+        //         setPersons(persons.concat(response.data))
+        //     })
 
         } else {
           window.alert(`${newName} is already added to phonebook`)

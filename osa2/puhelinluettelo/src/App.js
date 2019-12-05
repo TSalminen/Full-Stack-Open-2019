@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Persons from './components/Persons'
 import PersonForm from './components/PersonForm'
+import personService from './services/persons'
 // import { notStrictEqual } from 'assert'
 
 const App = () => {
@@ -16,15 +17,15 @@ const App = () => {
   const [ newNumber, setNewNumber ] = useState('')
   const [ newFilter, setNewFilter ] = useState('')
 
-  const baseUrl = 'http://localhost:3001/persons'
+  // const baseUrl = 'http://localhost:3001/persons'
 
   useEffect(() => {
     // console.log('effect')
-    axios
-      .get(baseUrl)
-      .then(response => {
+    personService
+      .getAll()
+      .then(intitialPersons => {
         // console.log('promise fulfilled')
-        setPersons(response.data)
+        setPersons(intitialPersons)
       })
   }, [])
 
