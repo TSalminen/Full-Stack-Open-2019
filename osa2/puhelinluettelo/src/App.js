@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import Persons from './components/Persons'
 import PersonForm from './components/PersonForm'
 import personService from './services/persons'
@@ -16,8 +15,6 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ newFilter, setNewFilter ] = useState('')
-
-  // const baseUrl = 'http://localhost:3001/persons'
 
   useEffect(() => {
     // console.log('effect')
@@ -56,7 +53,11 @@ const App = () => {
       />
       <h2>Numbers</h2>
       <ul>
-          {<Persons personsToShow={personsToShow}/>}
+          {<Persons 
+            persons={persons}
+            personsToShow={personsToShow} 
+            setPersons={setPersons} 
+          />}
       </ul>
     </div>
   )
