@@ -1,17 +1,30 @@
 import React from 'react'
 import personService from './../services/persons'
+//import Notification from './Notification'
 
 
 
-const Person = ({person, persons, setPersons}) => {
+
+const Person = ({person, persons, setPersons, setNotificationPersonAndType}) => {
     const id = person['id']
+    //const name = person['name']
 
     const confirmDeletePerson = () => {
         if (window.confirm(`Delete ${person['name']}`)) { 
-            personService
-                .deletePerson({person})
-            // console.log('deleted')
-            setPersons(persons.filter(p => p.id !== id))
+            try {
+                personService
+                    .deletePerson({person})
+                // console.log('deleted')
+                setPersons(persons.filter(p => p.id !== id))
+                setNotificationPersonAndType([person, 'removed'])
+                setTimeout(() => {
+                    setNotificationPersonAndType([null, null])
+                }, 3000)
+
+            } catch (e) {
+                console.log(`Request failed ${e}`)
+            }
+            
         } else {
             console.log('not deleted')
         }

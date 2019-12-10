@@ -1,7 +1,7 @@
 import React from 'react'
 import personService from './../services/persons'
 
-const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setPersons}) => {
+const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setPersons, setNotificationPersonAndType}) => {
 
     const addPerson = (event) => {
         event.preventDefault()
@@ -17,6 +17,10 @@ const PersonForm = ({newName, setNewName, newNumber, setNewNumber, persons, setP
             .then(returnedPerson => {
                 // console.log(response)
                 setPersons(persons.concat(returnedPerson))
+                setNotificationPersonAndType([returnedPerson, 'added'])
+                setTimeout(() => {
+                    setNotificationPersonAndType([null, null])
+                }, 3000)
             })
 
         } else {

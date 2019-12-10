@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Persons from './components/Persons'
 import PersonForm from './components/PersonForm'
+import Notification from './components/Notification'
 import personService from './services/persons'
 // import { notStrictEqual } from 'assert'
 
@@ -15,6 +16,8 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ newFilter, setNewFilter ] = useState('')
+  // const [ notificationPerson, setNotificationPerson ] = useState(null)
+  const [ notificationPersonAndType, setNotificationPersonAndType ] = useState([null, null])
 
   useEffect(() => {
     // console.log('effect')
@@ -36,6 +39,11 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+
+      <Notification 
+        props={notificationPersonAndType}
+      />
+
       <div>
         filter shown with <input 
           value={newFilter} 
@@ -50,13 +58,15 @@ const App = () => {
         setNewNumber={setNewNumber}
         persons={persons}
         setPersons={setPersons}
+        setNotificationPersonAndType={setNotificationPersonAndType}
       />
       <h2>Numbers</h2>
       <ul>
           {<Persons 
             persons={persons}
             personsToShow={personsToShow} 
-            setPersons={setPersons} 
+            setPersons={setPersons}
+            setNotificationPersonAndType={setNotificationPersonAndType}
           />}
       </ul>
     </div>
