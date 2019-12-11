@@ -8,22 +8,24 @@ const Notification = ({props}) => {
         return null
     }
 
-    let messageColor = 'green'
+    let backgroundColor = '#3da95c'
 
     if (messageEnd === 'removed') {
-        messageColor = 'red'
+        backgroundColor = '#e74d3d'
     } else if (messageEnd === 'updated') {
-        messageColor = 'blue'
+        backgroundColor = '#3ea3ff'
     }
 
+    const bg = '#888888'
+
     const notificationStyle = {
-        color: messageColor,
-        background: '#e6e6e6',
+        color: 'white',
+        background: backgroundColor,
         fontSize: 20,
-        borderStyle: 'solid',
-        borderRadius: 5,
+        borderRadius: 8,
         padding: 10,
-        marginBottom: 10
+        marginBottom: 20,
+        boxShadow: `3px 3px 8px ${bg}`
     }
     
     
