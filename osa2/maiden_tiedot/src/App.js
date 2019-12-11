@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import axiosService from './services/axiosService'
+//import axiosService from './services/axiosService'
 import axios from 'axios'
 
 
-const ShowCountries = ({countriesToShow}) => {
+const ShowCountries = ({countriesToShow, setCountriesToShow}) => {
   if (countriesToShow.length > 10) {
     return <div>Too many matches, specify another filter</div>
 
   } else if (countriesToShow.length > 1) {
-    return <ShowNameOfCountries countriesToShow={countriesToShow} />
+    return <ShowNameOfCountries countriesToShow={countriesToShow} setCountriesToShow={setCountriesToShow} />
 
   } else if (countriesToShow.length === 0) {
     return <div>no countries to show, check filter</div>
@@ -19,15 +19,22 @@ const ShowCountries = ({countriesToShow}) => {
   )
 }
 
-const CountryName = ({country}) => {
-  return <li>{country.name}</li>
+const CountryName = ({country, setCountriesToShow}) => {
+  return <li>{country.name} <button onClick={() => handleCountryClick({country, setCountriesToShow})}>show</button></li>
 }
 
-const ShowNameOfCountries = ({countriesToShow}) => {
+const handleCountryClick = ({country, setCountriesToShow}) => {
+      setCountriesToShow([country])
+      //console.log('counrty button clicked')
+}
+
+const ShowNameOfCountries = ({countriesToShow, setCountriesToShow}) => {
   const rows = () => countriesToShow.map(country =>
     <CountryName 
       key={country.name}
-      country={country} />
+      country={country} 
+      setCountriesToShow={setCountriesToShow}
+    />
   )
   return <ul>{rows()}</ul>
 }
@@ -37,7 +44,6 @@ const Language = ({language}) => {
 }
 
 const Languages = ({languages}) => {
-  //console.log(languages)
   return (
     languages.map(language =>
       <Language 
@@ -48,6 +54,7 @@ const Languages = ({languages}) => {
   )
 }
 
+
 const ShowCountryInfo = ({country}) => {
   
 
@@ -55,7 +62,6 @@ const ShowCountryInfo = ({country}) => {
   const capital = country['capital']
   const population = country['population']
   const languages = country['languages']
-  // const languageList = languages.map(language => <Language key={language} language={language} />)
   const flagUrl = country['flag']
 
   return (
@@ -64,8 +70,10 @@ const ShowCountryInfo = ({country}) => {
     <div>capital {capital} </div>
     <div>population {population} </div>
     <h2>languages</h2>
-    <Languages languages={languages} />
-    <img src={flagUrl} height="100"></img>
+    <ul>
+      <Languages languages={languages} />
+    </ul>
+    <img src={flagUrl} alt="Counrty flag" height="100"></img>
     </>
   )
 }
@@ -74,6 +82,7 @@ const ShowCountryInfo = ({country}) => {
 const App = () => {
   const [ allCountries, setAllCountries ] = useState([])
   const [ newFilter, setNewFilter ] = useState('')
+  const [ countriesToShow, setCountriesToShow ] = useState(allCountries)
 
   const baseUrl = 'https://restcountries.eu/rest/v2/all'
 
@@ -89,9 +98,10 @@ const App = () => {
 
   const handleFilterChange = (event) => {
     setNewFilter(event.target.value)
+    setCountriesToShow(allCountries.filter(country => country['name'].toLowerCase().includes(event.target.value.toLowerCase())))
   }
 
-  const countriesToShow = allCountries.filter(country => country['name'].toLowerCase().includes(newFilter.toLowerCase()))
+  //const countriesToShow = allCountries.filter(country => country['name'].toLowerCase().includes(newFilter.toLowerCase()))
 
   return (
     <>
@@ -102,7 +112,10 @@ const App = () => {
       />
     </div>
     <div>
-      <ShowCountries countriesToShow={countriesToShow} />
+      <ShowCountries 
+        countriesToShow={countriesToShow} 
+        setCountriesToShow={setCountriesToShow}
+      />
     </div>
     </>
   )
