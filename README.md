@@ -15,5 +15,5 @@ Tuukka Salminen
 ## Osa 2
 [Tehtävät 2.1-2.5: Kurssitiedot](https://github.com/TSalminen/Full-Stack-Open-2019/tree/master/osa2/kurssitiedot)\
 [Tehtävät 2.6-2.11 ja 2.15-2.19: Puhelinluettelo](https://github.com/TSalminen/Full-Stack-Open-2019/tree/master/osa2/puhelinluettelo)\
-[Tehtävät 2.12-2.13: Maiden tiedot](https://github.com/TSalminen/Full-Stack-Open-2019/tree/master/osa2/maiden_tiedot)
+[Tehtävät 2.12-2.13: Maiden tiedot](https://github.com/TSalminen/Full-Stack-Open-2019/tree/master/osa2/maiden_tiedot)\
 Huom. Tehtäviä 2.14*, 2.18* ja 2.20* ei tehty
